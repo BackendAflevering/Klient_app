@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 //other imports
-import 'package:backendappklient/pages/MenuPage.dart';
+import 'package:backendappklient/pages/MainTabs.dart';
 import 'package:backendappklient/pages/loginpage.dart';
 // This main.dart contains the login page.
 // master
@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget{
       initialRoute: 'home',
       routes: {
         'home': (context) => LoginPage(),
-        '/otherPage': (context) => GameScreen(),
+        '/Profile Page': (context) => TabLayout(),
+
       },
     );
   }

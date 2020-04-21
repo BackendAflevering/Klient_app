@@ -1,8 +1,10 @@
 import 'dart:core' as prefix0;
 import 'dart:core';
 import 'package:backendappklient/backend/BackendDAO.dart';
+import 'package:backendappklient/backend/Project.dart';
 import 'package:backendappklient/controller/Controller.dart';
 import 'package:backendappklient/backend/user.dart';
+import 'package:backendappklient/widgets/ProjectGridItem.dart';
 import 'package:flutter/material.dart';
 //other imports
 import 'package:backendappklient/pages/loginpage.dart';
@@ -15,7 +17,6 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
   final _formKey = GlobalKey<FormState>();
   final _username = TextEditingController();
   final _password = TextEditingController();
-
   @override
   Widget build(BuildContext context){
     return new Scaffold(
@@ -98,13 +99,15 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                           onPressed: () async {
                             var loginUserCredentials = new User(_username.text,_password.text);
                             if (_formKey.currentState.validate()) {
-                              // If the form is filled out, then go to profile page. In reality we need to check the username/password
-                              if(await c.logIn(loginUserCredentials)){ // Check if the user exists
-                                print("pushing");
-                                Navigator.pushNamed(context, '/otherPage');
+                               //If the form is filled out, then go to profile page. In reality we need to check the username/password
+                             //if(await c.logIn(loginUserCredentials)){ // Check if the user exists
+                               if(true){
+                                 print("Getting projects now...");
+                                 await c.getProject();
+                                 print("pushing");
+                               Navigator.pushNamed(context, '/Profile Page');
                               }
-                              else{
-                              }
+                              //Navigator.pushNamed(context, '/Profile Page');
                             }
                           },
                         )

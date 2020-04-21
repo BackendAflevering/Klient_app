@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:backendappklient/backend/Project.dart';
 import 'package:backendappklient/backend/user.dart';
 import 'package:backendappklient/backend/BackendDAO.dart';
 
@@ -6,60 +7,25 @@ BackendDAO dao = new BackendDAO();
 
 class Controller {
   // Constructor
+  Project _project;
+  List<Project> _projectList;
   Controller();
-
-  String _synligtOrd;
-  String _ordet;
-  String _brugteBogstaver;
-  List bogstaver;
   // methods
   Future<bool> logIn(User loginUser) async{
     bool login = await dao.checkLogin(loginUser); // Receive user from server
     return login;
   }
 
-  Future<String> start() async{
-    this._synligtOrd = await dao.startSpil();
-
-    return _synligtOrd;
+  Future<List<Project>> getProject()async{
+    List<Project> projects = await dao.getProjects("1");
+    print("Here is our project: "+projects.toString());
+    _projectList = projects;
+    return projects;
   }
 
-  String getSynligtOrd(){
-    return _synligtOrd;
+  List<Project> getList(){
+    return _projectList;
   }
-
-  Future<String> guessWord(String guess)async{
-    this._synligtOrd = await dao.guessOrd(guess);
-
-    return _synligtOrd;
-  }
-
-  Future<String> getOrdet()async{
-    this._ordet = await dao.getOrdet();
-    return _ordet;
-  }
-
-  Future<String> erSpilletSlut() async{
-    String boo = await dao.erSpilletSlut();
-    return boo;
-  }
-  Future<String> erSpilletTabt() async{
-    String boo = await dao.erSpilletTabt();
-    return boo;
-  }
-  Future<String> erSpilletVundet() async{
-    String boo = await dao.erSpilletVundet();
-    return boo;
-  }
-
-  Future<String> getForkerteBogstaver()async{
-    this._brugteBogstaver = await dao.getForkerteBogstaver();
-
-    return _brugteBogstaver;
-  }
-
-
-
 }
 
 
