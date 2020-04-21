@@ -3,7 +3,7 @@
 class Project{
   String projektnavn;
   int projekttid;
-  List<dynamic> medlemmer;
+  Set<String> medlemmer;
 
   Project(this.projektnavn,this.projekttid,this.medlemmer);
 
@@ -33,7 +33,7 @@ class Project{
   int getProjekttid(){
     return projekttid;
   }
-  List<String> getMedlemmer(){
+  Set<String> getMedlemmer(){
     return medlemmer;
   }
 

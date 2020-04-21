@@ -32,7 +32,7 @@ class BackendDAO {
     final response = await http.get(SERVER_URL+"/getProjekt?projektID="+id);
     print(response.body);
     List<Project> list;
-    list.add(Project.fromJson(jsonDecode(response.body)));
+    //list.add(Project.fromJson(jsonDecode(response.body)));
     return list;
   }
 
