@@ -27,9 +27,13 @@ class _ProfileTab extends State<Profile> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> projectList = projects.map((p) => ProjectGridItem(project: p)).toList();
+    Future<Project> projekt = c.getProject();
+    //List<Widget> projectList = projects.map((p) => ProjectGridItem(project: p)).toList();
     // Get number of projects attached to user
-    return GridView.count(crossAxisCount: 2,children: projectList);
+    //return GridView.count(crossAxisCount: 2,children: projectList);
+    return Container(
+
+    );
   }
 
 }

@@ -102,8 +102,7 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                                //If the form is filled out, then go to profile page. In reality we need to check the username/password
                              //if(await c.logIn(loginUserCredentials)){ // Check if the user exists
                                if(true){
-                                 print("Getting projects now...");
-                                 await c.getProject();
+                                 // await c.getProject();
                                  print("pushing");
                                Navigator.pushNamed(context, '/Profile Page');
                               }

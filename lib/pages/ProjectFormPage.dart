@@ -1,8 +1,10 @@
 // Define a custom Form widget.
 import 'package:backendappklient/backend/Project.dart';
+import 'package:backendappklient/controller/Controller.dart';
 import 'package:flutter/material.dart';
 
 class ProjectForm extends StatefulWidget {
+
   @override
   ProjectFormState createState() {
     return ProjectFormState();
@@ -15,12 +17,8 @@ class ProjectFormState extends State<ProjectForm> {
   final _projektnavn = TextEditingController();
   final _projekttid = TextEditingController();
   final _medlemmer = TextEditingController();
-
+  Controller c = new Controller();
   TextEditingController _controller = new TextEditingController();
-  FocusNode _projectNameFocus = new FocusNode();
-  FocusNode _projectTimeFocus = new FocusNode();
-  FocusNode _membersFocus = new FocusNode();
-
 
   final _formKey = GlobalKey<FormState>();
 
@@ -94,7 +92,19 @@ class ProjectFormState extends State<ProjectForm> {
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
               child: new Text("Create Project"),
               onPressed: (){
+                String projektNavn = _projektnavn.text;
+                String projektTid = _projekttid.text;
+                String members =_medlemmer.text;
+                print("Sender navn, tid og members til server: "+projektNavn+", "+projektTid.toString()+", "+members);
                 if(_formKey.currentState.validate()){
+                  List<String> medlemmerList = new List();
+                  medlemmerList.add(_medlemmer.text);
+                  int number = int.parse(_projekttid.text);
+
+                  Project projekt = new Project(_projektnavn.text,number);
+
+                  c.addProject(projekt);
+
                   Scaffold
                   .of(context)
                       .showSnackBar(SnackBar(content: Text('Processing new Project'),));
