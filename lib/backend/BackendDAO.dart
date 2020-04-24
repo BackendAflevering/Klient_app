@@ -8,7 +8,7 @@ import 'Project.dart';
 
 
 // TODO: HUSK AT SKIFT IP ADDRESSEN TIL DIN NUVÆRENDE IPV4 ADDRESSE!!!!
-String SERVER_URL = "http://192.168.1.100:809";
+String SERVER_URL = "http://ec2-13-48-130-164.eu-north-1.compute.amazonaws.com:80";
 
 class BackendDAO {
   Future<bool> checkLogin(User loginUser) async {
