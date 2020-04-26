@@ -4,7 +4,7 @@ import 'package:backendappklient/backend/BackendDAO.dart';
 import 'package:backendappklient/backend/Project.dart';
 import 'package:backendappklient/controller/Controller.dart';
 import 'package:backendappklient/backend/user.dart';
-import 'package:backendappklient/widgets/ProjectGridItem.dart';
+import 'package:backendappklient/pages/MainTabs.dart';
 import 'package:flutter/material.dart';
 //other imports
 import 'package:backendappklient/pages/loginpage.dart';
@@ -99,15 +99,22 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                           onPressed: () async {
                             var loginUserCredentials = new User(_username.text,_password.text);
                             if (_formKey.currentState.validate()) {
-                               //If the form is filled out, then go to profile page. In reality we need to check the username/password
-                             //if(await c.logIn(loginUserCredentials)){ // Check if the user exists
-                               if(true){
-                                 // await c.getProject();
-                                 print("pushing");
-                               Navigator.pushNamed(context, '/Profile Page');
+                              //If the form is filled out, then go to profile page. In reality we need to check the username/password
+                              //if (await c.logIn(loginUserCredentials)) { // Check if the user exists
+                                if (true) {
+                                  // await c.getProject();
+                                  print("pushing");
+                                  //Navigator.pushNamed(context, '/Profile Page');
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TabLayout(username: _username.text,),
+                                    ),
+                                  );
+                                }
+                                //Navigator.pushNamed(context, '/Profile Page');
                               }
-                              //Navigator.pushNamed(context, '/Profile Page');
-                            }
+                            //}
                           },
                         )
                       ],

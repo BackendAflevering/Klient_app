@@ -1,10 +1,15 @@
+import 'package:backendappklient/controller/Controller.dart';
 import 'package:backendappklient/pages/ProjectFormPage.dart';
-import 'package:backendappklient/states/ProfileTab.dart';
+import 'package:backendappklient/states/MyProjectsTab.dart';
 import 'package:flutter/material.dart';
 
 //next level
 
 class TabLayout extends StatelessWidget {
+  String username;
+  TabLayout({Key key,@required this.username}) : super(key: key);
+
+  Controller c = new Controller();
   @override
   Widget build(BuildContext context) {
     return new DefaultTabController(
@@ -21,7 +26,7 @@ class TabLayout extends StatelessWidget {
             leading: new Container(),
             bottom: TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.account_box),text: "Profil",),
+                Tab(icon: Icon(Icons.account_box),text: "Mine projekter (" + username+")"),
                 Tab(icon: Icon(Icons.access_alarm),text: "Nyt Project",)
               ],
             ),

@@ -10,6 +10,8 @@ class Controller {
   Project _project;
   Project projekt;
   List<Project> _projectList;
+  String _username;
+
   Controller();
   // methods
   Future<bool> logIn(User loginUser) async{
@@ -35,6 +37,26 @@ class Controller {
   Future addProject(Project projekt) async{
    bool b = await dao.addProject(projekt);
    print("boolean= "+b.toString());
+  }
+  
+  List<Project> getOfflineProjects(){
+    List<Project> projects = List<Project>();
+
+    projects.add(new Project("Vanilla", 2));
+    projects.add(new Project("Burning Crusade", 4));
+    projects.add(new Project("Wrath of the Lich King",6));
+    projects.add(new Project("Cataclysm", 8));
+
+    return projects;
+  }
+  void setCurrentLoggedIn(String username){
+    print("setting username: "+username);
+    _username = username;
+  }
+
+  String getCurrentLoggedIn(){
+    print("returning username: "+_username);
+    return _username;
   }
 }
 
