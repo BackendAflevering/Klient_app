@@ -29,10 +29,11 @@ class _ProfileTab extends State<Profile> with SingleTickerProviderStateMixin {
       itemCount: projects.length,
       itemBuilder: (context,index){
         return Container(
-            decoration: BoxDecoration( //                    <-- BoxDecoration
+            decoration: BoxDecoration( //<-- BoxDecoration
               border: Border(bottom: BorderSide()),
             ),
-          child: ListTile(
+          child:
+          ListTile(
             title: Text(projects[index].getProjektnavn()),
             onTap: (){
               Project _current = projects[index];
@@ -50,6 +51,14 @@ class _ProfileTab extends State<Profile> with SingleTickerProviderStateMixin {
         return Divider();
       },
     );
+  }
+
+  Color getProjectcolor(Project project){
+    Color color;
+    if(project.getProjektnavn().isNotEmpty){
+      color = Colors.green;
+    }
+    return color;
   }
 
 }

@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 //other imports
 import 'package:backendappklient/pages/loginpage.dart';
 
+import 'MyProjectsTab.dart';
+
 Controller c = new Controller();
 BackendDAO run = new BackendDAO();
 
@@ -97,6 +99,9 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                           style: new TextStyle(fontSize: 18),
                           ),
                           onPressed: () async {
+                            BackendDAO b = new BackendDAO();
+                            b.getProjects("Projekt Sigma");
+                            b.getUserProjects("Mark");
                             var loginUserCredentials = new User(_username.text,_password.text);
                             if (_formKey.currentState.validate()) {
                               //If the form is filled out, then go to profile page. In reality we need to check the username/password
@@ -111,6 +116,7 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                                       builder: (context) => TabLayout(username: _username.text,),
                                     ),
                                   );
+
                                 }
                                 //Navigator.pushNamed(context, '/Profile Page');
                               }

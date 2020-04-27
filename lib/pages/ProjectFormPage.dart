@@ -17,6 +17,7 @@ class ProjectFormState extends State<ProjectForm> {
   final _projektnavn = TextEditingController();
   final _projekttid = TextEditingController();
   final _medlemmer = TextEditingController();
+  List<String> medlemmer = new List();
   Controller c = new Controller();
   TextEditingController _controller = new TextEditingController();
 
@@ -32,6 +33,7 @@ class ProjectFormState extends State<ProjectForm> {
         children: <Widget>[
           SizedBox(height: 100),
           new TextFormField(
+
             validator: (value){
               if(value.isEmpty){
                 return 'Enter this field';
@@ -100,9 +102,7 @@ class ProjectFormState extends State<ProjectForm> {
                   List<String> medlemmerList = new List();
                   medlemmerList.add(_medlemmer.text);
                   int number = int.parse(_projekttid.text);
-
-                  Project projekt = new Project(_projektnavn.text,number);
-
+                  Project projekt = new Project(_projektnavn.text,number,medlemmerList);
                   c.addProject(projekt);
 
                   Scaffold

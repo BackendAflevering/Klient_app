@@ -21,13 +21,9 @@ class Controller {
 
   Future<Project> getProject()async{
     _project = await dao.getProjects("waaac");
-    projekt = _project;
+    _projectList.add(_project);
     print(projekt.getProjektnavn());
     return _project;
-  }
-
-  Project getP(){
-    return projekt;
   }
 
   List<Project> getList(){
@@ -42,10 +38,10 @@ class Controller {
   List<Project> getOfflineProjects(){
     List<Project> projects = List<Project>();
 
-    projects.add(new Project("Vanilla", 2));
-    projects.add(new Project("Burning Crusade", 4));
-    projects.add(new Project("Wrath of the Lich King",6));
-    projects.add(new Project("Cataclysm", 8));
+    projects.add(new Project("Vanilla", 2,null));
+    projects.add(new Project("Burning Crusade", 4,null));
+    projects.add(new Project("Wrath of the Lich King",6,null));
+    projects.add(new Project("Cataclysm", 8,null));
 
     return projects;
   }
