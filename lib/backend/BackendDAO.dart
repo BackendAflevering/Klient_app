@@ -9,7 +9,7 @@ import 'Project.dart';
 
 // TODO: HUSK AT SKIFT IP ADDRESSEN TIL DIN NUVÆRENDE IPV4 ADDRESSE!!!!
 String SERVER_URL = "http://ec2-13-48-130-164.eu-north-1.compute.amazonaws.com:80";
-String LOCALHOST_URL = "http://192.168.1.100:8080";
+String LOCALHOST_URL = "http://192.168.1.26:8080";
 class BackendDAO {
   Project _project;
 
@@ -19,7 +19,7 @@ class BackendDAO {
     String username = loginUser.getUsername();
     String password = loginUser.getPassword();
     final response = await http
-        .get(SERVER_URL + '/login?brugernavn='+username+'&kodeord='+password)
+        .get(LOCALHOST_URL + '/login?brugernavn='+username+'&kodeord='+password)
         .catchError((error) => print(error.toString()));
     print("response: "+response.body);
     if (response.statusCode == 200) {
@@ -32,29 +32,36 @@ class BackendDAO {
   }
 
   Future<Project> getProjects(String id) async{
-    final response = await http.get(LOCALHOST_URL+"/getProjekter?projektID="+id);
+    final response = await http.get(LOCALHOST_URL+"/getBrugerProjekt?projektID="+id);
     var responseJson = json.decode(response.body);
     print(responseJson);
     Project projekt = Project.fromJson(jsonDecode(response.body));
     print("got Project successfully");
+    print(projekt.toString());
     //list.add(Project.fromJson(jsonDecode(response.body)));
     _project = projekt;
     return projekt;
   }
 
-  Project getP(){
-    print("project is set");
-    return _project;
-  }
+  Future<Iterable> getUserProjects(String username) async {
+    var response = await http.get(LOCALHOST_URL+"/getAlleBrugerProjekter?brugernavn="+username);
+    Iterable iterable;
 
-  Future<List<Project>> getUserProjects(String username) async {
-    var response = await http.get(LOCALHOST_URL+"/getAllUserProjekter?username="+username);
-    List<Project> projects;
-    print(json.decode(response.body)[0]);
-    projects = (json.decode(response.body) as List).map((i) =>
-        Project.fromJson(i)).toList();
+    if (response.statusCode == 200){
 
-    return null;
+      iterable = (json.decode(response.body)as List).map((i) => Project.fromJson(i));
+      print("Iterable of all the projects: ");
+      print(iterable);
+
+      for(int i = 0; i < iterable.length; i++){
+        Project project = iterable.elementAt(i);
+        print(project);
+      }
+
+    } else {
+      print("Something went wrong");
+    }
+    return iterable;
   }
 
   Future<bool> addProject(Project projekt) async {

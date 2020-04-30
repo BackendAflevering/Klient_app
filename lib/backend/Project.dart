@@ -9,20 +9,12 @@ class Project{
  factory Project.fromJson(Map<String, dynamic> parsedJson) {
     // parsedJson er altså vores indkommende Map<String, dynamic>, som skal blive til en user.
     Project project = new Project(
-      parsedJson['projektnavn'] as String,
+      parsedJson['projektnavn'],
       parsedJson['projekttid'] as int,
-      parsedJson['medlemmer'] as List<dynamic>
+        List<String>.from(parsedJson["medlemmer"].map((x) => x))
     );
     return project;
   }
-
-//   Project.fromJson(Map<String, dynamic> parsedJson) {
-//
-//    projektnavn = parsedJson['projektnavn'];
-//    medlemmer = parsedJson['medlemmer'];
-//    projekttid = parsedJson['projekttid'];
-//  }
-
   Map<String, dynamic> toJson() => {
     'projektnavn': projektnavn,
     'projekttid': projekttid.toString(),
@@ -43,9 +35,6 @@ class Project{
   List<String> getMedlemmer(){
     return medlemmer;
   }
-// List<String> getMedlemmer(){
-    //return medlemmer;
-//}
 
 
 }
