@@ -18,7 +18,7 @@ class Project{
   Map<String, dynamic> toJson() => {
     'projektnavn': projektnavn,
     'projekttid': projekttid.toString(),
-    'medlemmer':medlemmer.toString()
+    'medlemmer':List<dynamic>.from(medlemmer.map((x) => x))
     //'medlemmer' : medlemmer.toString()
   };
 

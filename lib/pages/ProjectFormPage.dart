@@ -79,7 +79,7 @@ class ProjectFormState extends State<ProjectForm> {
             decoration: new InputDecoration(
                 labelStyle: TextStyle(fontSize: 25),
                 labelText: "Members",
-                hintText: 'e.g Goku, Vegeta'
+                hintText: '(You can only add 1 member at this time)'
             ),
             keyboardType: TextInputType.text,
             controller: _medlemmer,

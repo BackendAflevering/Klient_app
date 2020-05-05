@@ -19,9 +19,9 @@ class BackendDAO {
     String username = loginUser.getUsername();
     String password = loginUser.getPassword();
     final response = await http
-        .get(LOCALHOST_URL + '/login?brugernavn='+username+'&kodeord='+password)
+        .post(LOCALHOST_URL + '/login?brugernavn='+username+'&kodeord='+password)
         .catchError((error) => print(error.toString()));
-    print("response: "+response.body);
+    print("response: "+response.statusCode.toString());
     if (response.statusCode == 200) {
       return true;
     }
@@ -62,16 +62,16 @@ class BackendDAO {
   }
 
   Future<bool> addProject(Project projekt) async {
-    var body = projekt.toJson();
+    var body = json.encode(projekt.toJson());
+    print("Trying to add this project body:");
+    print(projekt.toJson());
     // make POST request
     //Response response = await post(SERVER_URL+"/nytprojekt", body: body);
     final response = await http
-        .post(LOCALHOST_URL + '/nytprojekt?projektnavn='+projekt.getProjektnavn()+'&projekttid='+projekt.getProjekttid().toString()+'&medlemmer='+projekt.getMedlemmer().toString())
+        .post(LOCALHOST_URL + '/nytProjekt',body: body)
         .catchError((error) => print(error.toString()));
-
     print("Response is: ");
     print(response.body);
-
     if(response.statusCode==200){
       print("Project sent to server!");
       return true;
@@ -79,7 +79,17 @@ class BackendDAO {
     print("Project did not send");
     return false;
   }
-
+  Future<bool> updateProject(Project projekt) async{
+    final response = await http
+        .post(LOCALHOST_URL + '/opdaterProjekt?projektnavn='+projekt.getProjektnavn()+'&projekttid='+projekt.getProjekttid().toString()+'&medlemmer='+projekt.getMedlemmer().toString())
+        .catchError((error) => print(error.toString()));
+    if(response.statusCode==200){
+      print("Project updated successfully!!");
+      return true;
+    }
+    print("Project did not update");
+    return false;
+  }
 
 
 }

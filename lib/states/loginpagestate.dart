@@ -102,8 +102,8 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                             var loginUserCredentials = new User(_username.text,_password.text);
                             if (_formKey.currentState.validate()) {
                               //If the form is filled out, then go to profile page. In reality we need to check the username/password
-                              //if (await c.logIn(loginUserCredentials)) { // Check if the user exists
-                                if (true) {
+                              //await c.logIn(loginUserCredentials)
+                              if (await c.logIn(loginUserCredentials)) { // Check if the user exists
                                   //await c.getProject();
                                   print("Logging in with user: "+_username.text);
                                   c.setCurrentLoggedIn(_username.text);
@@ -114,10 +114,9 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                                         builder: (context) => TabLayout(username: _username.text),
                                       ),
                                     );
-                                }
                                 //Navigator.pushNamed(context, '/Profile Page');
                               }
-                            //}
+                            }
                           },
                         )
                       ],

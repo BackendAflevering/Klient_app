@@ -16,6 +16,7 @@ class Controller {
   // methods
   Future<bool> logIn(User loginUser) async{
     bool login = await dao.checkLogin(loginUser); // Receive user from server
+    print("login status: "+login.toString());
     return login;
   }
 
@@ -29,9 +30,14 @@ class Controller {
     return _projectList;
   }
 
-  Future addProject(Project projekt) async{
-   bool b = await dao.addProject(projekt);
-   print("boolean= "+b.toString());
+  Future<bool> addProject(Project projekt) async{
+   bool a = await dao.addProject(projekt);
+   print("boolean= "+a.toString());
+   return a;
+  }
+  Future<bool> updateProject(Project projekt) async{
+    bool u = await dao.updateProject(projekt);
+    return u;
   }
 
   Future<List<Project>> getLoggedInProjects(String username) async{
