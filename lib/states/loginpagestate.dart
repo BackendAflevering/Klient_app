@@ -99,24 +99,21 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
                           style: new TextStyle(fontSize: 18),
                           ),
                           onPressed: () async {
-                            BackendDAO b = new BackendDAO();
-                            b.getProjects("Projekt Sigma");
-                            b.getUserProjects("Mark");
                             var loginUserCredentials = new User(_username.text,_password.text);
                             if (_formKey.currentState.validate()) {
                               //If the form is filled out, then go to profile page. In reality we need to check the username/password
                               //if (await c.logIn(loginUserCredentials)) { // Check if the user exists
                                 if (true) {
-                                  // await c.getProject();
-                                  print("pushing");
+                                  //await c.getProject();
+                                  print("Logging in with user: "+_username.text);
+                                  c.setCurrentLoggedIn(_username.text);
                                   //Navigator.pushNamed(context, '/Profile Page');
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => TabLayout(username: _username.text,),
-                                    ),
-                                  );
-
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TabLayout(username: _username.text),
+                                      ),
+                                    );
                                 }
                                 //Navigator.pushNamed(context, '/Profile Page');
                               }

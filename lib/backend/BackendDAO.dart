@@ -9,7 +9,7 @@ import 'Project.dart';
 
 // TODO: HUSK AT SKIFT IP ADDRESSEN TIL DIN NUVÆRENDE IPV4 ADDRESSE!!!!
 String SERVER_URL = "http://ec2-13-48-130-164.eu-north-1.compute.amazonaws.com:80";
-String LOCALHOST_URL = "http://192.168.1.26:8080";
+String LOCALHOST_URL = "http://192.168.1.100:8080";
 class BackendDAO {
   Project _project;
 
@@ -43,25 +43,22 @@ class BackendDAO {
     return projekt;
   }
 
-  Future<Iterable> getUserProjects(String username) async {
+  Future<List<Project>> getUserProjects(String username) async {
     var response = await http.get(LOCALHOST_URL+"/getAlleBrugerProjekter?brugernavn="+username);
     Iterable iterable;
-
     if (response.statusCode == 200){
-
+      List<Project> projects = new List<Project>();
       iterable = (json.decode(response.body)as List).map((i) => Project.fromJson(i));
-      print("Iterable of all the projects: ");
-      print(iterable);
-
       for(int i = 0; i < iterable.length; i++){
         Project project = iterable.elementAt(i);
-        print(project);
+        print(project.getProjektnavn());
+        projects.add(project);
       }
-
+    return projects;
     } else {
-      print("Something went wrong");
+      print("Something went wrong with the connection");
+      return null;
     }
-    return iterable;
   }
 
   Future<bool> addProject(Project projekt) async {

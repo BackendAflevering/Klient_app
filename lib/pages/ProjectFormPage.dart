@@ -97,10 +97,10 @@ class ProjectFormState extends State<ProjectForm> {
                 String projektNavn = _projektnavn.text;
                 String projektTid = _projekttid.text;
                 String members =_medlemmer.text;
-                print("Sender navn, tid og members til server: "+projektNavn+", "+projektTid.toString()+", "+members);
+                print("Sender navn, tid og members til server: "+projektNavn+", "+projektTid.toString());
                 if(_formKey.currentState.validate()){
                   List<String> medlemmerList = new List();
-                  medlemmerList.add(_medlemmer.text);
+                  medlemmerList.add(members);
                   int number = int.parse(_projekttid.text);
                   Project projekt = new Project(_projektnavn.text,number,medlemmerList);
                   c.addProject(projekt);

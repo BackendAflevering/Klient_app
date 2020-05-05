@@ -1,3 +1,4 @@
+import 'package:backendappklient/backend/Project.dart';
 import 'package:backendappklient/controller/Controller.dart';
 import 'package:backendappklient/pages/ProjectFormPage.dart';
 import 'package:backendappklient/states/MyProjectsTab.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 class TabLayout extends StatelessWidget {
   String username;
   TabLayout({Key key,@required this.username}) : super(key: key);
-
   Controller c = new Controller();
   @override
   Widget build(BuildContext context) {
@@ -40,6 +40,9 @@ class TabLayout extends StatelessWidget {
           )),
 
         );
+  }
+  String getUsername(){
+    return username;
   }
 }
 
