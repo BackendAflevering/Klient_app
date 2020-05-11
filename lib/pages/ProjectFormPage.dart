@@ -68,7 +68,7 @@ class ProjectFormState extends State<ProjectForm> {
           ),
 
           new TextFormField(
-            onChanged: (text){
+            onSaved: (text){
             },
             validator: (value){
               if(value.isEmpty){
