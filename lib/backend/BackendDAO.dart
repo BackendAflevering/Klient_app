@@ -9,7 +9,7 @@ import 'Project.dart';
 
 // TODO: HUSK AT SKIFT IP ADDRESSEN TIL DIN NUVÆRENDE IPV4 ADDRESSE!!!!
 String SERVER_URL = "http://ec2-13-48-130-164.eu-north-1.compute.amazonaws.com:80";
-String LOCALHOST_URL = "http://192.168.1.100:8080";
+String LOCALHOST_URL = "http://172.17.19.225:8080";
 class BackendDAO {
   Project _project;
 
@@ -19,7 +19,7 @@ class BackendDAO {
     String username = loginUser.getUsername();
     String password = loginUser.getPassword();
     final response = await http
-        .post(LOCALHOST_URL + '/login?brugernavn='+username+'&kodeord='+password)
+        .post(SERVER_URL + '/login?brugernavn='+username+'&kodeord='+password)
         .catchError((error) => print(error.toString()));
     print("response: "+response.statusCode.toString());
     if (response.statusCode == 200) {
@@ -32,7 +32,7 @@ class BackendDAO {
   }
 
   Future<Project> getProjects(String id) async{
-    final response = await http.get(LOCALHOST_URL+"/getBrugerProjekt?projektID="+id);
+    final response = await http.get(SERVER_URL+"/getBrugerProjekt?projektID="+id);
     var responseJson = json.decode(response.body);
     print(responseJson);
     Project projekt = Project.fromJson(jsonDecode(response.body));
@@ -44,7 +44,7 @@ class BackendDAO {
   }
 
   Future<List<Project>> getUserProjects(String username) async {
-    var response = await http.get(LOCALHOST_URL+"/getAlleBrugerProjekter?brugernavn="+username);
+    var response = await http.get(SERVER_URL+"/getAlleBrugerProjekter?brugernavn="+username);
     Iterable iterable;
     if (response.statusCode == 200){
       List<Project> projects = new List<Project>();
@@ -66,7 +66,6 @@ class BackendDAO {
     print("Trying to add this project body:");
     print(projekt.toJson());
     // make POST request
-    //Response response = await post(SERVER_URL+"/nytprojekt", body: body);
     final response = await http
         .post(LOCALHOST_URL + '/nytProjekt',body: body)
         .catchError((error) => print(error.toString()));
