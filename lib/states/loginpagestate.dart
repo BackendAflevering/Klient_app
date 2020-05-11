@@ -8,8 +8,7 @@ import 'package:backendappklient/pages/MainTabs.dart';
 import 'package:flutter/material.dart';
 //other imports
 import 'package:backendappklient/pages/loginpage.dart';
-
-import 'MyProjectsTab.dart';
+import 'package:backendappklient/Tabs/MyProjectsTab.dart';
 
 Controller c = new Controller();
 BackendDAO run = new BackendDAO();
